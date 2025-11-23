@@ -1,9 +1,6 @@
 package Consola.GUI;
 
-import Consola.SubMenu.SubMenuAdmin;
-import Consola.SubMenu.SubMenuCliente;
-import Consola.SubMenu.SubMenuIncidentes;
-import Consola.SubMenu.SubMenuMonitoreoWiFi;
+import Consola.SubMenu.*;
 import Extras.Funcionalidades;
 
 import java.util.Scanner;
