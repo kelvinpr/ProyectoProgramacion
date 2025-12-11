@@ -47,13 +47,13 @@ public class LoginGUI {
     private boolean loginCliente() {
         System.out.println("===== LOGIN CLIENTE =====");
         System.out.print("Ingrese su usuario: ");
-        usuarioActual = sc.nextLine();
+        usuarioActual = func.validarUsuario();
 
         System.out.print("Ingrese su contraseña: ");
-        String contrasenia = sc.nextLine();
+        String contrasenia = func.validarContrasenia();
 
-        if (usuarioActual.equals("cliente") && contrasenia.equals("1234")) {
-            System.out.println("Bienvenido cliente!");
+        if (usuarioActual.equals("cliente") && contrasenia.equals("Cliente123")) {
+            System.out.println("Bienvenido cliente");
             return true;
         } else {
             System.out.println("Credenciales de cliente incorrectas.");
@@ -64,13 +64,13 @@ public class LoginGUI {
     private boolean loginAdmin() {
         System.out.println("===== LOGIN ADMINISTRADOR =====");
         System.out.print("Ingrese su usuario: ");
-        String usuario = sc.nextLine();
+        String usuario = func.validarUsuario();
 
         System.out.print("Ingrese su contraseña: ");
-        String contrasenia = sc.nextLine();
+        String contrasenia = func.validarContrasenia();
 
-        if (usuario.equals("admin") && contrasenia.equals("admin123")) {
-            System.out.println("Bienvenido administrador!");
+        if (usuario.equals("admin") && contrasenia.equals("Admin1234")) {
+            System.out.println("Bienvenido administrador");
             return true;
         } else {
             System.out.println("Credenciales de administrador incorrectas.");

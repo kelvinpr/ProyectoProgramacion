@@ -4,9 +4,9 @@ import Extras.Funcionalidades;
 import Consola.GUI.LoginGUI;
 
 public class Menu {
-    private final Funcionalidades func =  new Funcionalidades();
-    private final SubMenuMonitoreoWiFi subMenuMonitoreoWiFi = new SubMenuMonitoreoWiFi();
-    private final LoginGUI login =  new LoginGUI();
+    private  Funcionalidades func =  new Funcionalidades();
+    private  SubMenuMonitoreoWiFi subMenuMonitoreoWiFi = new SubMenuMonitoreoWiFi();
+    private  LoginGUI login =  new LoginGUI();
     public void mostrarMenuPrincipal() {
         int opc;
         do {
