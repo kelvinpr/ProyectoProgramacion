@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="77c0b332-11a8-4bd3-8976-a1527aef79a4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SistemaDeMonitoreoWifi.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/AdminGUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/ClienteGUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/Incidente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/IncidentesGUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/LoginGUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/MonitoreoRedWiFiGUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Consola/SubMenu/Menu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Consola/SubMenu/SubMenuAdmin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Consola/SubMenu/SubMenuCliente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Consola/SubMenu/SubMenuIncidentes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Consola/SubMenu/SubMenuMonitoreoWiFi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/Cliente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/Empleado.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/Incidente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/MonitoreoWifi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/PruebaWifi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/SolicitudDeSoporte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/TipoIncidente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/Usuario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Extras/Funcionalidades.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test/Proyecto.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="388AZoBlEnpm7TtTZ1iU1BG9HxG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/kelvi/Downloads/U2_Tarea 4.Asociación, Agregación, Composición_Grupo 04/U2_Tarea 4.Asociación, Agregación, Composición_Grupo 04",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="77c0b332-11a8-4bd3-8976-a1527aef79a4" name="Changes" comment="" />
+      <created>1768170883608</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768170883608</updated>
+      <workItem from="1768170887307" duration="117000" />
+      <workItem from="1768171071841" duration="1227000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
