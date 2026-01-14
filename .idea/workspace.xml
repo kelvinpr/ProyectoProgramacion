@@ -4,44 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77c0b332-11a8-4bd3-8976-a1527aef79a4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SistemaDeMonitoreoWifi.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/AdminGUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/ClienteGUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/Incidente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/IncidentesGUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/LoginGUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Consola/GUI/MonitoreoRedWiFiGUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Consola/SubMenu/Menu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Consola/SubMenu/SubMenuAdmin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Consola/SubMenu/SubMenuCliente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Consola/SubMenu/SubMenuIncidentes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Consola/SubMenu/SubMenuMonitoreoWiFi.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/Cliente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/Empleado.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/Incidente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/MonitoreoWifi.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/PruebaWifi.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/SolicitudDeSoporte.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/TipoIncidente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/Usuario.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Extras/Funcionalidades.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test/Proyecto.java" beforeDir="false" />
+    <list default="true" id="77c0b332-11a8-4bd3-8976-a1527aef79a4" name="Changes" comment="Nueva Version">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Consola/GUI/AdminGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Consola/GUI/AdminGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Consola/GUI/IncidentesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Consola/GUI/IncidentesGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Consola/GUI/LoginGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Consola/GUI/LoginGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Consola/GUI/SolicitudDeSoporteGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Consola/GUI/SolicitudDeSoporteGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Consola/SubMenu/SubMenuAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Consola/SubMenu/SubMenuAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Consola/SubMenu/SubMenuIncidenteAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Consola/SubMenu/SubMenuIncidenteAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/EmpleadoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/EmpleadoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dominio/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Dominio/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dominio/Empleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Dominio/Empleado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dominio/Incidente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Dominio/Incidente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dominio/SolicitudDeSoporte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Dominio/SolicitudDeSoporte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dominio/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Dominio/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ImplementacionDAO/EmpleadoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ImplementacionDAO/EmpleadoDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Test/Proyecto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/Proyecto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;kelvinpr&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kelvinpr/ProyectoProgramacion.git&quot;,
+    &quot;accountId&quot;: &quot;587f8392-aaae-4f7b-b1b3-c4740c7dc912&quot;
+  }
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -50,12 +56,16 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="388AZoBlEnpm7TtTZ1iU1BG9HxG" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Proyecto.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -71,7 +81,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -93,11 +103,28 @@
       <updated>1768170883608</updated>
       <workItem from="1768170887307" duration="117000" />
       <workItem from="1768171071841" duration="1227000" />
+      <workItem from="1768190734635" duration="295000" />
+      <workItem from="1768425713653" duration="195000" />
+      <workItem from="1768426139827" duration="128000" />
+      <workItem from="1768427304651" duration="3736000" />
     </task>
+    <task id="LOCAL-00001" summary="Nueva Version">
+      <option name="closed" value="true" />
+      <created>1768190794905</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1768190794906</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Nueva Version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nueva Version" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -6,11 +6,11 @@ public class Empleado extends Usuario {
     private Incidente[] incidentes;
 
     public Empleado(){
-        this("Sin nombre","Sin Cedula","Sin email","Sin contrasenia","Admin","SinId");
+        this("Sin nombre","Sin Cedula","Sin email","Sin contrasenia","SinId");
     }
 
-    public Empleado(String nombre, String cedula, String email, String contrasenia, String rol, String idEmpleado){
-        super(nombre, cedula, email, contrasenia, rol);
+    public Empleado(String nombre, String cedula, String email, String contrasenia, String idEmpleado){
+        super(nombre, cedula, email, contrasenia, Rol.ADMIN);
         this.idEmpleado = idEmpleado;
         this.incidentes = new Incidente[0];
     }

@@ -2,32 +2,33 @@ package Dominio;
 import java.time.LocalDate;
 
 public class Incidente {
-    private int idIncidente;
-    private LocalDate fechaReporte;
+    private static final int COMENTARIOS_SIZE = 3;
+    private final int idIncidente;
+    private final   LocalDate fechaReporte;
     private String descripcion;
     private String[] comentarios;
     private int contadorComentarios;
     private Empleado empleadoAsignado;
-    private String estado;
+    private EstadoIncidente estado;
     private SolicitudDeSoporte solicitudOrigen;
 
     public Incidente(){
         this(0,null,"Sin descripcion",null);
     }
     public Incidente(int idIncidente,
-                 LocalDate fechaReporte,
-                 String descripcion,
-                 SolicitudDeSoporte solicitudOrigen) {
+                     LocalDate fechaReporte,
+                     String descripcion,
+                     SolicitudDeSoporte solicitudOrigen) {
 
         this.idIncidente = idIncidente;
         this.fechaReporte = fechaReporte;
         this.descripcion = descripcion;
         this.solicitudOrigen = solicitudOrigen;
 
-        this.estado = "PENDIENTE";
+        this.estado = EstadoIncidente.PENDIENTE;
         this.empleadoAsignado = null;
 
-        this.comentarios = new String[3];
+        this.comentarios = new String[COMENTARIOS_SIZE];
         this.contadorComentarios = 0;
     }
 
@@ -57,31 +58,20 @@ public class Incidente {
         return solicitudOrigen;
     }
 
-    public String getEstado(){
+    public EstadoIncidente getEstado(){
         return estado;  
     }
 
     public void asignarEmpleado(Empleado e) {
         if (e != null) {
             this.empleadoAsignado = e;
-            this.estado = "EN PROCESO";
+            this.estado = EstadoIncidente.EN_PROCESO;
         }
     }
 
-    public void cambiarEstado(String estado) {
+    public void cambiarEstado(EstadoIncidente estado) {
         if (estado != null) {
             this.estado = estado;
-        }
-    }
-
-    public void setIdIncidente(int idIncidente){
-        if (idIncidente > 0) {
-            this.idIncidente = idIncidente;
-        }
-    }
-    public void setFechaReporte(LocalDate fechaReporte) {
-        if (fechaReporte != null) {
-            this.fechaReporte = fechaReporte;
         }
     }
     public void setComentarios(String[] comentarios){
@@ -94,8 +84,7 @@ public class Incidente {
             this.descripcion = descripcion;
         }
     }
-    
-    
+
     public void setEmpleadoAsignado(Empleado empleadoAsignado){
         if(empleadoAsignado != null) {
             this.empleadoAsignado = empleadoAsignado;
@@ -103,7 +92,7 @@ public class Incidente {
     }
 
     public void agregarComentario(String comentario) {
-        if (comentario == null) return;
+        if (comentario == null || comentario.isBlank()) return;
 
         if (contadorComentarios >= comentarios.length) {
             String[] aux = new String[comentarios.length + 1];
@@ -111,27 +100,20 @@ public class Incidente {
             comentarios = aux;
         }
 
-        comentarios[contadorComentarios] = comentario;
-        contadorComentarios++;
+        comentarios[contadorComentarios++] = comentario;
     }
 
     @Override
     public String toString() {
-
-    StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append("Incidente{")
-        .append("idIncidente=").append(idIncidente)
-        .append(", fechaReporte=").append(fechaReporte)
-        .append(", descripcion='").append(descripcion).append('\'')
-        .append(", estado=").append(estado);
-
-        if (empleadoAsignado != null) {
-            sb.append(", empleado=").append(empleadoAsignado.getNombre());
-        } else {
-            sb.append(", empleado=No asignado");
-        }
-
-        sb.append(", comentarios=[");
+                .append("id=").append(idIncidente)
+                .append(", fecha=").append(fechaReporte)
+                .append(", descripcion='").append(descripcion).append('\'')
+                .append(", estado=").append(estado)
+                .append(", empleado=")
+                .append(empleadoAsignado != null ? empleadoAsignado.getNombre() : "No asignado")
+                .append(", comentarios=[");
 
         for (int i = 0; i < contadorComentarios; i++) {
             sb.append(comentarios[i]);
@@ -139,7 +121,6 @@ public class Incidente {
         }
 
         sb.append("]}");
-
         return sb.toString();
     }
 

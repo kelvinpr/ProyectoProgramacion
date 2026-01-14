@@ -24,9 +24,8 @@ public class Proyecto {
         Cliente cliente = new Cliente(
                 "Juan",
                 "123456789",
-                "juan@mail.com",
+                "juan@gmail.com",
                 "Cliente123",
-                "CLIENTE",
                 "CL-001",
                 "099999999",
                 "Quito",
@@ -36,11 +35,10 @@ public class Proyecto {
         clienteDAO.crear(cliente);
 
         Empleado admin = new Empleado(
-                "Admin",
+                "Jorge",
                 "987654321",
-                "admin@mail.com",
+                "admin@gmail.com",
                 "Admin123",
-                "ADMIN",
                 "EMP-001"
                 );
         empleadoDAO.crear(admin);

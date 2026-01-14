@@ -11,4 +11,6 @@ public interface EmpleadoDAO {
     boolean actualizar(Empleado empleado);
 
     Empleado[] listar();
+
+    boolean eliminar(String idEmpleado);
 }

@@ -4,95 +4,54 @@ import java.time.LocalDate;
 
 public class SolicitudDeSoporte {
 
-    private int idSolicitud;
-    private LocalDate fechaSolicitud;
+    private final int idSolicitud;
+    private final LocalDate fechaSolicitud;
     private String descripcion;
-    private String prioridad;
-    private String estado;
-    // Asociación 1 -> 0..1 : SolicitudDeSoporte puede tener 0 o 1 Incidente
-    private Incidente incidente;
-    //Asociacion
+    private EstadoSolicitud estado;
     private Cliente cliente;
+    private Incidente incidente;
 
     public SolicitudDeSoporte() {
-        this(0,null,"Sin descripcion","Sin prioridad","Sin estado",null);
+        this(0,"Sin descripcion",null);
     }
 
-    public SolicitudDeSoporte(int idSolicitud, LocalDate fechaSolicitud,
-                              String descripcion, String prioridad, String estado,Cliente cliente) {
-
+    public SolicitudDeSoporte(int idSolicitud, String descripcion, Cliente cliente) {
         this.idSolicitud = idSolicitud;
-        this.fechaSolicitud = fechaSolicitud;
+        this.fechaSolicitud = LocalDate.now();
         this.descripcion = descripcion;
-        this.prioridad = prioridad;
-        this.estado = estado;
         this.cliente = cliente;
+        this.estado = EstadoSolicitud.PENDIENTE;
+        this.incidente = null;
     }
 
     public int getIdSolicitud() {
         return idSolicitud;
     }
 
-    public LocalDate getFechaSolicitud() {
-        return fechaSolicitud;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public String getPrioridad() {
-        return prioridad;
-    }
-
-    public String getEstado() {
+    public EstadoSolicitud getEstado() {
         return estado;
+    }
+
+    public void setEstado(EstadoSolicitud estado) {
+        if (estado != null)
+            this.estado = estado;
     }
 
     public Incidente getIncidente() {
         return incidente;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setIdSolicitud(int idSolicitud) {
-        if(idSolicitud > 0)
-            this.idSolicitud = idSolicitud;
-    }
-
-    public void setFechaSolicitud(LocalDate fechaSolicitud){
-        if(fechaSolicitud != null)
-            this.fechaSolicitud = fechaSolicitud;
-    }
-
-    public void setDescripcion(String descripcion) {
-        if (descripcion != null && !descripcion.trim().isEmpty()) {
-            this.descripcion = descripcion;
-        }
-    }
-
-    public void setPrioridad(String prioridad) {
-        if (prioridad != null && !prioridad.trim().isEmpty()) {
-            this.prioridad = prioridad;
-        }
-    }
-
-    public void setEstado(String estado) {
-        if (estado != null && !estado.trim().isEmpty()) {
-            this.estado = estado;
-        }
-    }
-
     public void setIncidente(Incidente incidente) {
-        if(incidente != null)
-            this.incidente = incidente;
+        this.incidente = incidente;
+        this.estado = EstadoSolicitud.PENDIENTE;
     }
 
-    public void setCliente(Cliente cliente) {
-        if(cliente != null)
-            this.cliente = cliente;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     @Override
@@ -101,7 +60,6 @@ public class SolicitudDeSoporte {
                 "idSolicitud = " + idSolicitud +
                 ", fechaSolicitud = " + fechaSolicitud +
                 ", descripcion = " + descripcion +
-                ", prioridad = " + prioridad+
                 ", estado = " + estado;
     }
 }

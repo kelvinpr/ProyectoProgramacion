@@ -22,10 +22,7 @@ public class SolicitudDeSoporteGUI {
 
         SolicitudDeSoporte s = new SolicitudDeSoporte(
                 (int)(System.currentTimeMillis() % 100000),
-                LocalDate.now(),
                 desc,
-                "MEDIA",
-                "PENDIENTE",
                 cliente
         );
 

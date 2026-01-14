@@ -1,8 +1,6 @@
 package Consola.GUI;
 
-import Dominio.Empleado;
-import Dominio.Incidente;
-import Dominio.SolicitudDeSoporte;
+import Dominio.*;
 import Extras.Funcionalidades;
 import ImplementacionDAO.EmpleadoDAOImpl;
 import ImplementacionDAO.IncidenteDAOImpl;
@@ -109,17 +107,17 @@ public class IncidentesGUI {
 
         int op = func.validarEntradaOpcion();
 
-        String nuevoEstado = switch (op) {
-            case 1 -> "PENDIENTE";
-            case 2 -> "EN PROCESO";
-            case 3 -> "ATENDIDO";
+        EstadoIncidente nuevoEstado = switch (op) {
+            case 1 -> EstadoIncidente.PENDIENTE;
+            case 2 -> EstadoIncidente.EN_PROCESO;
+            case 3 -> EstadoIncidente.ATENDIDO;
             default -> incidente.getEstado();
         };
 
         incidente.cambiarEstado(nuevoEstado);
 
-        if (nuevoEstado.equals("ATENDIDO")) {
-            incidente.getSolicitudOrigen().setEstado("RESUELTA");
+        if (nuevoEstado == EstadoIncidente.ATENDIDO) {
+            incidente.getSolicitudOrigen().setEstado(EstadoSolicitud.RESUELTA);
         }
 
         System.out.println("Estado actualizado correctamente");

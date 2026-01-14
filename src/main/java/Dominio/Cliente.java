@@ -15,11 +15,11 @@ public class Cliente extends Usuario {
 
 
     public Cliente(){
-        this("Sin nombre","Sin Cedula","Sin email","Sin contrasenia","Cliente","Sin Id","Sin telefono","Sin direccion",null);
+        this("Sin nombre","Sin Cedula","Sin email","Sin contrasenia","Sin Id","Sin telefono","Sin direccion",null);
     }
 
-    public Cliente(String nombre,String cedula,String email,String contrasenia,String rol,String idCliente,String telefono,String direccion,LocalDate fechaRegistro){
-        super(nombre,cedula,email,contrasenia,rol);
+    public Cliente(String nombre,String cedula,String email,String contrasenia,String idCliente,String telefono,String direccion,LocalDate fechaRegistro){
+        super(nombre,cedula,email,contrasenia, Rol.CLIENTE);
         this.idCliente = idCliente;
         this.telefono = telefono;
         this.direccion = direccion;

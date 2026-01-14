@@ -63,4 +63,18 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
         System.arraycopy(empleados, 0, aux, 0, contador);
         return aux;
     }
+
+    @Override
+    public boolean eliminar(String idEmpleado) {
+        for (int i = 0; i < contador; i++) {
+            if (empleados[i].getIdEmpleado().equals(idEmpleado)) {
+
+                System.arraycopy(empleados,i + 1,empleados,i,contador - i - 1);
+                empleados[contador - 1] = null;
+                contador--;
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -14,7 +14,7 @@ public class SubMenuIncidenteAdmin {
             System.out.println("\n=== INCIDENTES (ADMIN) ===");
             System.out.println("1. Crear incidente desde solicitud");
             System.out.println("2. Asignar empleado");
-            System.out.println("3. Cambiar estado");
+            System.out.println("3. Cambiar estado del incidente");
             System.out.println("4. Agregar comentario"); // 👈 NUEVO
             System.out.println("5. Listar incidentes");
             System.out.println("6. Eliminar incidente");

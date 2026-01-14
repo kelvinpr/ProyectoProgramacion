@@ -5,13 +5,13 @@ public class Usuario {
     private String cedula;
     private String email;
     private String contrasenia;
-    private String rol;
+    private Rol rol;
 
     public Usuario(){
-        this("Sin Nombre","Sin Cedula","Sin email","Sin contrasenia","Sin rol");
+        this("Sin Nombre","Sin Cedula","Sin email","Sin contrasenia", Rol.CLIENTE);
     }
 
-    public Usuario(String nombre, String cedula, String email, String contrasenia, String rol){
+    public Usuario(String nombre, String cedula, String email, String contrasenia, Rol rol){
         this.nombre = nombre;
         this.cedula = cedula;
         this.email = email;
@@ -35,7 +35,7 @@ public class Usuario {
         return contrasenia;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
@@ -57,11 +57,6 @@ public class Usuario {
     public void setContrasenia(String contrasenia){
         if(contrasenia != null)
             this.contrasenia = contrasenia;
-    }
-
-    public void setRol(String rol){
-        if(rol != null)
-            this.rol = rol;
     }
 
     @Override

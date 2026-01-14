@@ -121,21 +121,23 @@ public class LoginGUI {
         do {
             System.out.println("\n===== MENÚ ADMINISTRADOR =====");
             System.out.println("1. Gestión de clientes");
-            System.out.println("2. Solicitudes de soporte");
-            System.out.println("3. Incidentes");
-            System.out.println("4. Cerrar sesión");
+            System.out.println("2. Gestión de empleados");
+            System.out.println("3. Solicitudes de soporte");
+            System.out.println("4. Incidentes");
+            System.out.println("5. Cerrar sesión");
             System.out.print("Seleccione una opción: ");
 
             opcion = func.validarEntradaOpcion();
 
             switch (opcion) {
-                case 1 -> smAdmin.mostrar();
-                case 2 -> smSolicitudes.mostrar();
-                case 3 -> smIncidentes.mostrar();
-                case 4 -> System.out.println("Cerrando sesión...");
+                case 1 -> smAdmin.menuClientes();
+                case 2 -> smAdmin.menuEmpleados();
+                case 3 -> smSolicitudes.mostrar();
+                case 4 -> smIncidentes.mostrar();
+                case 5 -> System.out.println("Cerrando sesión...");
                 default -> System.out.println("Opción inválida");
             }
 
-        } while (opcion != 4);
+        } while (opcion != 5);
     }
 }
