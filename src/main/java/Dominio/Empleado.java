@@ -32,7 +32,13 @@ public class Empleado extends Usuario {
         if(incidentes != null)
             this.incidentes = incidentes;
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(!(obj instanceof Empleado)) return false;
+        Empleado aux = (Empleado) obj;
+        return this.getCedula().equals(aux.getCedula());
+    }
     @Override
     public String toString() {
         return super.toString() + "\nIdEmpleado: " + idEmpleado;

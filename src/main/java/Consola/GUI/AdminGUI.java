@@ -44,8 +44,11 @@ public class AdminGUI {
                 LocalDate.now()
         );
 
-        clienteDAO.crear(c);
-        System.out.println("Cliente registrado");
+        if(!clienteDAO.crear(c)){
+            System.out.println("Cliente existente!");
+        }else {
+            System.out.println("Cliente registrado");
+        }
     }
 
     public void listarClientes() {
@@ -119,8 +122,6 @@ public class AdminGUI {
         System.out.print("Correo: ");
         String email = func.validarCorreo();
 
-        System.out.print("Contraseña: ");
-        String pass = func.validarContrasenia();
 
         String id = String.format("EMP-%03d", System.currentTimeMillis() % 1000);
 
@@ -128,12 +129,16 @@ public class AdminGUI {
                 nombre,
                 cedula,
                 email,
-                pass,
+                "Admin123",
                 id
         );
 
-        empleadoDAO.crear(e);
-        System.out.println("Empleado registrado correctamente");
+        if(!empleadoDAO.crear(e)){
+            System.out.printf("Empleado Duplicado!!");
+        }else{
+            System.out.println("Empleado registrado correctamente");
+
+        }
     }
 
     public void buscarEmpleado() {

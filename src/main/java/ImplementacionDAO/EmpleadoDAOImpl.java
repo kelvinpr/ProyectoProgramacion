@@ -25,6 +25,12 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
     public boolean crear(Empleado empleado) {
         if (empleado == null) return false;
 
+        for(int i = 0; i < contador; i++){
+            if(empleados[i].equals(empleado)){
+                return false;
+            }
+        }
+
         if (contador >= empleados.length) {
             Empleado[] aux = new Empleado[empleados.length + 1];
             System.arraycopy(empleados, 0, aux, 0, empleados.length);

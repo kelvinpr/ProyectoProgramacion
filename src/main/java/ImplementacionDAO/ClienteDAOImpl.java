@@ -26,6 +26,11 @@ public class ClienteDAOImpl implements ClienteDAO {
     public boolean crear(Cliente cliente) {
         if (cliente == null) return false;
 
+        for(int i = 0; i < contador; i++){
+            if(clientes[i].equals(cliente)){
+                return false;
+            }
+        }
         if (contador >= clientes.length) {
             Cliente[] aux = new Cliente[contador + 1];
             System.arraycopy(clientes, 0, aux, 0, contador);

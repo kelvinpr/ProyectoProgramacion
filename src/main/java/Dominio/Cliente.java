@@ -2,6 +2,8 @@ package Dominio;
 
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class Cliente extends Usuario {
     private String idCliente;
@@ -113,6 +115,14 @@ public class Cliente extends Usuario {
 
     public SolicitudDeSoporte[] getSolicitudes() {
         return solicitudDeSoportes;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(!(obj instanceof Cliente)) return false;
+        Cliente aux = (Cliente)obj;
+        return this.getCedula().equals(aux.getCedula());
     }
 
     @Override
