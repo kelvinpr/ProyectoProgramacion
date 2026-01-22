@@ -1,18 +1,20 @@
 package ImplementacionDAO;
 
 import DAO.ClienteDAO;
+import DAO.ExceptionDAO;
 import Dominio.Cliente;
+
+
+import java.util.Set;
+import java.util.TreeSet;
 
 public class ClienteDAOImpl implements ClienteDAO {
 
     private static ClienteDAOImpl instancia;
-
-    private Cliente[] clientes;
-    private int contador;
+    private Set<Cliente> clientes;
 
     private ClienteDAOImpl(){
-        this.clientes = new Cliente[3];
-        this.contador = 0;
+        this.clientes = new TreeSet<Cliente>();
     }
 
     public static ClienteDAOImpl getInstancia() {
@@ -23,68 +25,41 @@ public class ClienteDAOImpl implements ClienteDAO {
     }
     
     @Override
-    public boolean crear(Cliente cliente) {
-        if (cliente == null) return false;
-
-        for(int i = 0; i < contador; i++){
-            if(clientes[i].equals(cliente)){
-                return false;
-            }
-        }
-        if (contador >= clientes.length) {
-            Cliente[] aux = new Cliente[contador + 1];
-            System.arraycopy(clientes, 0, aux, 0, contador);
-            clientes = aux;
-        }
-
-        clientes[contador] = cliente;
-        contador++;
+    public boolean crear(Cliente cliente) throws ExceptionDAO {
+        if (cliente == null) throw new ExceptionDAO("Cliente nulo");
+        if(!clientes.add(cliente)) throw new ExceptionDAO("Cliente duplicado (cédula ya registrada)");
         return true;
     }
 
     @Override
-    public Cliente buscarPorId(String idCliente) {
-        if(idCliente == null) return null;
-        for(Cliente cli: clientes) {
-            if(cli != null && cli.getIdCliente().equals(idCliente)) {
-                return cli;
-            }
+    public Cliente buscarPorId(String idCliente) throws ExceptionDAO {
+        for(Cliente aux:clientes){
+            if(aux.getIdCliente().equals(idCliente)) return aux;
         }
-        return null;
+        throw new ExceptionDAO("Cliente no encontrado");
     }
 
     @Override
-    public boolean actualizar(Cliente cliente) {
+    public boolean actualizar(Cliente cliente) throws ExceptionDAO{
         if (cliente == null) return false;
-
-        for (int i = 0; i < contador; i++) {
-            if (clientes[i].getIdCliente().equals(cliente.getIdCliente())) {
-                clientes[i] = cliente;
-                return true;
-            }
-        }
-        return false;
+        Cliente aux = buscarPorId(cliente.getIdCliente());
+        if (aux == null) return false;
+        clientes.remove(aux);
+        clientes.add(cliente);
+        return true;
     }
 
     @Override
-    public boolean eliminarPorId(String idCliente) {
-         for (int i = 0; i < contador; i++) {
-            if (clientes[i].getIdCliente().equals(idCliente)) {
-
-                System.arraycopy(clientes,i + 1,clientes,i,contador - i - 1);
-                clientes[contador - 1] = null;
-                contador--;
-                return true;
-            }
-        }
-        return false;
+    public boolean eliminarPorId(String idCliente) throws ExceptionDAO {
+         Cliente aux = buscarPorId(idCliente);
+         if (aux == null) return false;
+         clientes.remove(aux);
+        return true;
     }
 
     @Override
-    public Cliente[] listar() {
-        Cliente[] aux = new Cliente[contador];
-        System.arraycopy(clientes, 0, aux, 0, contador);
-        return aux;
+    public TreeSet<Cliente> listar() {
+        return new TreeSet<>(clientes);
     }
 
 }

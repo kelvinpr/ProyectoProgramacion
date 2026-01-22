@@ -1,6 +1,6 @@
 package Dominio;
 
-public class Empleado extends Usuario {
+public class Empleado extends Usuario implements Comparable<Empleado>{
     private String idEmpleado;
     //// Un administrador puede estar asociado a muchos incidentes
     private Incidente[] incidentes;
@@ -38,6 +38,10 @@ public class Empleado extends Usuario {
         if(!(obj instanceof Empleado)) return false;
         Empleado aux = (Empleado) obj;
         return this.getCedula().equals(aux.getCedula());
+    }
+    @Override
+    public int compareTo(Empleado o) {
+        return this.getCedula().compareTo(o.getCedula());
     }
     @Override
     public String toString() {

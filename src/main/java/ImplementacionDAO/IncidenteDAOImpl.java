@@ -1,17 +1,20 @@
 package ImplementacionDAO;
 
+import DAO.ExceptionDAO;
 import DAO.IncidenteDAO;
 import Dominio.Incidente;
+import Dominio.SolicitudDeSoporte;
+
+import java.util.Set;
+import java.util.TreeSet;
 
 public class IncidenteDAOImpl implements IncidenteDAO {
 
     private static IncidenteDAOImpl instancia;
-    private Incidente[] incidentes;
-    private int contador;
+    private Set<Incidente> incidentes;
 
     private IncidenteDAOImpl() {
-        incidentes = new Incidente[3];
-        contador = 0;
+        this.incidentes =  new TreeSet<>();
     }
 
     public  static IncidenteDAOImpl getInstancia() {
@@ -22,63 +25,40 @@ public class IncidenteDAOImpl implements IncidenteDAO {
     }
 
     @Override
-    public boolean crear(Incidente incidente) {
-        if (incidente == null) return false;
-
-        if (contador >= incidentes.length) {
-            Incidente[] aux =
-                    new Incidente[incidentes.length + 1];
-            System.arraycopy(incidentes, 0, aux, 0, incidentes.length);
-            incidentes = aux;
-        }
-
-        incidentes[contador] = incidente;
-        contador++;
+    public boolean crear(Incidente incidente) throws ExceptionDAO {
+        if (incidente == null) throw new ExceptionDAO("Incidente nulo");
+        if(!incidentes.add(incidente)) throw new ExceptionDAO("Incidente duplicado");
         return true;
     }
 
     @Override
-    public Incidente buscarPorId(int idIncidente) {
-        for (int i = 0; i < contador; i++) {
-            if (incidentes[i].getIdIncidente() == idIncidente) {
-                return incidentes[i];
-            }
+    public Incidente buscarPorId(int idIncidente) throws ExceptionDAO {
+        for (Incidente i : incidentes) {
+            if (i.getIdIncidente() == idIncidente) return i;
         }
-        return null;
+        throw new ExceptionDAO("Incidente no encontrado");
     }
 
     @Override
-    public boolean actualizar(Incidente incidente) {
+    public boolean actualizar(Incidente incidente) throws ExceptionDAO {
         if (incidente == null) return false;
-
-        for (int i = 0; i < contador; i++) {
-            if (incidentes[i].getIdIncidente()
-                    == incidente.getIdIncidente()) {
-                incidentes[i] = incidente;
-                return true;
-            }
-        }
-        return false;
+        Incidente aux = buscarPorId(incidente.getIdIncidente());
+        if (aux == null) return false;
+        incidentes.remove(aux);
+        incidentes.add(incidente);
+        return true;
     }
 
     @Override
-    public boolean eliminarPorId(int idIncidente) {
-        for (int i = 0; i < contador; i++) {
-            if (incidentes[i].getIdIncidente() == idIncidente) {
-
-                System.arraycopy(incidentes, i + 1, incidentes, i, contador - i - 1);
-                incidentes[contador - 1] = null;
-                contador--;
-                return true;
-            }
-        }
-        return false;
+    public boolean eliminarPorId(int idIncidente) throws ExceptionDAO {
+        Incidente aux = buscarPorId(idIncidente);
+        if (aux == null) return false;
+        incidentes.remove(aux);
+        return true;
     }
 
     @Override
-    public Incidente[] listar() {
-        Incidente[] aux = new Incidente[contador];
-        System.arraycopy(incidentes, 0, aux, 0, contador);
-        return aux;
+    public TreeSet<Incidente> listar() {
+        return new TreeSet<>(incidentes);
     }
 }

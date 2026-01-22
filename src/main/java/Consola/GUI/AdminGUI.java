@@ -1,6 +1,7 @@
 package Consola.GUI;
 
 import DAO.EmpleadoDAO;
+import DAO.ExceptionDAO;
 import Dominio.Empleado;
 import Dominio.Rol;
 import Extras.Funcionalidades;
@@ -10,6 +11,7 @@ import ImplementacionDAO.ClienteDAOImpl;
 import ImplementacionDAO.EmpleadoDAOImpl;
 
 import java.time.LocalDate;
+import java.util.TreeSet;
 
 public class AdminGUI {
 
@@ -18,36 +20,37 @@ public class AdminGUI {
     private EmpleadoDAO empleadoDAO = EmpleadoDAOImpl.getInstancia();
 
     public void registrarCliente() {
-        System.out.print("Nombre: ");
-        String nombre = func.validarNombre();
+        try {
+            System.out.print("Nombre: ");
+            String nombre = func.validarNombre();
 
-        System.out.print("Cedula: ");
-        String cedula = func.validarTelefono();
+            System.out.print("Cedula: ");
+            String cedula = func.validarTelefono();
 
-        System.out.print("Correo: ");
-        String correo = func.validarCorreo();
+            System.out.print("Correo: ");
+            String correo = func.validarCorreo();
 
-        System.out.print("Teléfono: ");
-        String telefono = func.validarTelefono();
+            System.out.print("Teléfono: ");
+            String telefono = func.validarTelefono();
 
-        System.out.print("Direccion: ");
-        String direccion = func.validarNombre();
+            System.out.print("Direccion: ");
+            String direccion = func.validarNombre();
 
-        Cliente c = new Cliente(
-                nombre,
-                cedula,
-                correo,
-                "Cliente123",
-                "CL-" + System.currentTimeMillis() % 1000,
-                telefono,
-                direccion,
-                LocalDate.now()
-        );
+            Cliente c = new Cliente(
+                    nombre,
+                    cedula,
+                    correo,
+                    "Cliente123",
+                    "CL-" + System.currentTimeMillis() % 1000,
+                    telefono,
+                    direccion,
+                    LocalDate.now()
+            );
+            clienteDAO.crear(c);
+            System.out.println("Cliente creado correctamente");
 
-        if(!clienteDAO.crear(c)){
-            System.out.println("Cliente existente!");
-        }else {
-            System.out.println("Cliente registrado");
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
         }
     }
 
@@ -57,126 +60,116 @@ public class AdminGUI {
         }
     }
     public void buscarCliente() {
-        System.out.print("Ingrese el ID del cliente: ");
-        String id = func.validarUsuario();
+        try {
+            System.out.print("Ingrese el ID del cliente: ");
+            String id = func.validarUsuario();
 
-        Cliente cliente = clienteDAO.buscarPorId(id);
-
-        if (cliente == null) {
-            System.out.println("Cliente no encontrado");
-        } else {
+            Cliente cliente = clienteDAO.buscarPorId(id);
             System.out.println("\n=== CLIENTE ENCONTRADO ===");
             System.out.println(cliente);
+
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
         }
     }
 
     public void actualizarCliente() {
-    System.out.print("Ingrese el ID del cliente a actualizar: ");
-    String id = func.validarUsuario();
+        try {
+            System.out.print("Ingrese el ID del cliente a actualizar: ");
+            String id = func.validarUsuario();
 
-    Cliente cliente = clienteDAO.buscarPorId(id);
+            Cliente cliente = clienteDAO.buscarPorId(id);
 
-        if (cliente == null) {
-            System.out.println("Cliente no encontrado");
-            return;
+            System.out.println("\n=== CLIENTE ACTUAL ===");
+            System.out.println(cliente);
+
+
+            System.out.print("Nuevo correo: ");
+            String correo = func.validarCorreo();
+            cliente.setEmail(correo);
+
+            System.out.print("Nuevo teléfono: ");
+            String telefono = func.validarTelefono();
+            cliente.setTelefono(telefono);
+
+            System.out.print("Nueva dirección: ");
+            String direccion = func.validarNombre();
+            cliente.setDireccion(direccion);
+
+            System.out.println("Cliente actualizado correctamente");
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
         }
-
-        System.out.println("\n=== CLIENTE ACTUAL ===");
-        System.out.println(cliente);
-
-        System.out.println("\nIngrese los nuevos datos (deje vacío para no cambiar)");
-
-        System.out.print("Nuevo correo: ");
-        String correo = func.validarCorreo();
-        cliente.setEmail(correo);
-
-        System.out.print("Nuevo teléfono: ");
-        String telefono = func.validarTelefono();
-        cliente.setTelefono(telefono);
-
-        System.out.print("Nueva dirección: ");
-        String direccion = func.validarNombre();
-        cliente.setDireccion(direccion);
-
-        System.out.println("Cliente actualizado correctamente");
     }
 
     public void eliminarCliente() {
-        System.out.print("ID cliente: ");
-        String id = func.validarUsuario();
+        try {
+            System.out.print("ID cliente: ");
+            String id = func.validarUsuario();
 
-        if (clienteDAO.eliminarPorId(id))
+            clienteDAO.eliminarPorId(id);
             System.out.println("Cliente eliminado");
-        else
-            System.out.println("Cliente no encontrado");
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
+        }
     }
 
     public void registrarEmpleado() {
+        try {
+            System.out.print("Nombre: ");
+            String nombre = func.validarNombre();
 
-        System.out.print("Nombre: ");
-        String nombre = func.validarNombre();
+            System.out.print("Cédula: ");
+            String cedula = func.validarUsuario();
 
-        System.out.print("Cédula: ");
-        String cedula = func.validarUsuario();
-
-        System.out.print("Correo: ");
-        String email = func.validarCorreo();
+            System.out.print("Correo: ");
+            String email = func.validarCorreo();
 
 
-        String id = String.format("EMP-%03d", System.currentTimeMillis() % 1000);
+            String id = String.format("EMP-%03d", System.currentTimeMillis() % 1000);
 
-        Empleado e = new Empleado(
-                nombre,
-                cedula,
-                email,
-                "Admin123",
-                id
-        );
-
-        if(!empleadoDAO.crear(e)){
-            System.out.printf("Empleado Duplicado!!");
-        }else{
-            System.out.println("Empleado registrado correctamente");
-
+            Empleado e = new Empleado(
+                    nombre,
+                    cedula,
+                    email,
+                    "Admin123",
+                    id
+            );
+            empleadoDAO.crear(e);
+            System.out.println("Empleado creado correctamente");
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
         }
     }
 
     public void buscarEmpleado() {
+        try {
+            System.out.print("ID empleado: ");
+            String id = func.validarUsuario();
 
-        System.out.print("ID empleado: ");
-        String id = func.validarUsuario();
-
-        Empleado e = empleadoDAO.buscarPorId(id);
-
-        if (e == null) {
-            System.out.println("Empleado no encontrado");
-        } else {
+            Empleado e = empleadoDAO.buscarPorId(id);
             System.out.println("\n=== EMPLEADO ENCONTRADO ===");
             System.out.println(e);
+
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
         }
     }
 
     public void listarEmpleados() {
-        Empleado[] empleados = empleadoDAO.listar();
-
-        if (empleados == null) {
-            System.out.println("No hay empleados registrados");
-            return;
-        }
-        for (Empleado e : empleados) {
-            if (e != null)
-                System.out.println(e);
+        for (Empleado aux : empleadoDAO.listar()) {
+            System.out.println(aux);
         }
     }
 
     public void eliminarEmpleado() {
-
-        System.out.print("ID empleado: ");
-        String id = func.validarUsuario();
-
-        if (empleadoDAO.eliminar(id))
-            System.out.println("Empleado eliminado");
-        else
-            System.out.println("Empleado no encontrado");
+        try {
+            System.out.print("ID empleado: ");
+            String id = func.validarUsuario();
+            empleadoDAO.eliminar(id);
+            System.out.println("Empleado eliminado" );
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
+        }
     }
 }

@@ -2,15 +2,17 @@ package DAO;
 
 import Dominio.Cliente;
 
+import java.util.TreeSet;
+
 public interface ClienteDAO {
-    boolean crear(Cliente cliente);
+    boolean crear(Cliente cliente) throws ExceptionDAO;
 
-    Cliente buscarPorId(String idCliente);
+    Cliente buscarPorId(String idCliente) throws ExceptionDAO;
 
-    boolean actualizar(Cliente cliente);
+    boolean actualizar(Cliente cliente) throws ExceptionDAO;
 
-    boolean eliminarPorId(String idCliente);
+    boolean eliminarPorId(String idCliente) throws ExceptionDAO;
 
-    Cliente[] listar();
+    TreeSet<Cliente> listar();
 
 }

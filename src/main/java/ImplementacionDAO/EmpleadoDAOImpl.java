@@ -1,17 +1,21 @@
 package ImplementacionDAO;
 
 import DAO.EmpleadoDAO;
+import DAO.ExceptionDAO;
+import Dominio.Cliente;
 import Dominio.Empleado;
+import com.sun.source.tree.Tree;
+
+import java.util.Set;
+import java.util.TreeSet;
 
 public class EmpleadoDAOImpl implements EmpleadoDAO {
 
     private static EmpleadoDAOImpl instancia;
-    private Empleado[] empleados;
-    private int contador;
+    private Set<Empleado> empleados;
 
      private EmpleadoDAOImpl() {
-        empleados = new Empleado[3]; 
-        contador = 0;
+        this.empleados = new  TreeSet<>();
     }
 
     public static EmpleadoDAOImpl getInstancia() {
@@ -22,65 +26,40 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
     }
 
     @Override
-    public boolean crear(Empleado empleado) {
-        if (empleado == null) return false;
-
-        for(int i = 0; i < contador; i++){
-            if(empleados[i].equals(empleado)){
-                return false;
-            }
-        }
-
-        if (contador >= empleados.length) {
-            Empleado[] aux = new Empleado[empleados.length + 1];
-            System.arraycopy(empleados, 0, aux, 0, empleados.length);
-            empleados = aux;
-        }
-        empleados[contador] = empleado;
-        contador++;
+    public boolean crear(Empleado empleado) throws ExceptionDAO {
+        if (empleado == null) throw new ExceptionDAO("Empleado nulo");
+        if(!empleados.add(empleado)) throw new ExceptionDAO("Empleado duplicado");
         return true;
     }
 
     @Override
-    public Empleado buscarPorId(String idEmpleado) {
+    public Empleado buscarPorId(String idEmpleado) throws ExceptionDAO {
         for(Empleado empleado : empleados) {
             if(empleado.getIdEmpleado().equals(idEmpleado)) return empleado;
         }
-        return null;
+        throw new ExceptionDAO("Empleado no encontrado");
     }
 
     @Override
-    public boolean actualizar(Empleado empleado) {
+    public boolean actualizar(Empleado empleado) throws  ExceptionDAO {
         if (empleado == null) return false;
-
-        for (int i = 0; i < contador; i++) {
-            if (empleados[i].getIdEmpleado()
-                    .equals(empleado.getIdEmpleado())) {
-                empleados[i] = empleado;
-                return true;
-            }
-        }
-        return false;
+        Empleado aux = buscarPorId(empleado.getIdEmpleado());
+        if (aux == null) return false;
+        empleados.remove(aux);
+        empleados.add(empleado);
+        return true;
     }
 
     @Override
-    public Empleado[] listar() {
-        Empleado[] aux = new Empleado[contador];
-        System.arraycopy(empleados, 0, aux, 0, contador);
-        return aux;
+    public TreeSet<Empleado> listar() {
+        return new TreeSet<>(empleados);
     }
 
     @Override
-    public boolean eliminar(String idEmpleado) {
-        for (int i = 0; i < contador; i++) {
-            if (empleados[i].getIdEmpleado().equals(idEmpleado)) {
-
-                System.arraycopy(empleados,i + 1,empleados,i,contador - i - 1);
-                empleados[contador - 1] = null;
-                contador--;
-                return true;
-            }
-        }
-        return false;
+    public boolean eliminar(String idEmpleado) throws ExceptionDAO {
+        Empleado aux = buscarPorId(idEmpleado);
+        if (aux == null) return false;
+        empleados.remove(aux);
+        return true;
     }
 }

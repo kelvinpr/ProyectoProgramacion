@@ -2,7 +2,7 @@ package Dominio;
 
 import java.util.ArrayList;
 
-public class MonitoreoWifi {
+public class MonitoreoWifi implements Comparable<MonitoreoWifi> {
 
     private String idMonitoreo;
     private String nombreRed;
@@ -77,6 +77,18 @@ public class MonitoreoWifi {
         return p;
     }
 
+    @Override
+    public int compareTo(MonitoreoWifi o) {
+        return this.idMonitoreo.compareTo(o.idMonitoreo);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof MonitoreoWifi)) return false;
+        MonitoreoWifi m = (MonitoreoWifi) obj;
+        return idMonitoreo.equals(m.idMonitoreo);
+    }
     @Override
     public String toString() {
         return "MonitoreoWifi{" +

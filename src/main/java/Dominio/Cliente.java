@@ -4,16 +4,17 @@ package Dominio;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.TreeSet;
 
-public class Cliente extends Usuario {
+public class Cliente extends Usuario implements Comparable<Cliente> {
     private String idCliente;
     private String telefono;
     private String direccion;
     private LocalDate fechaRegistro;
     // Asociación 1 -> 0..* : Cliente tiene muchas SolicitudDeSoporte
-    private SolicitudDeSoporte[] solicitudDeSoportes;
+    private TreeSet<SolicitudDeSoporte > solicitudes;
     // Asociación 0..* -> 1 : Un Cliente puede aparecer en muchos MonitoreoWiFi
-    private MonitoreoWifi[] monitoreoWiFi;
+    private TreeSet<MonitoreoWifi> monitoreos;
 
 
     public Cliente(){
@@ -26,8 +27,8 @@ public class Cliente extends Usuario {
         this.telefono = telefono;
         this.direccion = direccion;
         this.fechaRegistro = fechaRegistro;
-        this.solicitudDeSoportes = new SolicitudDeSoporte[0];
-        this.monitoreoWiFi = new MonitoreoWifi[0];
+        this.solicitudes = new TreeSet<>();
+        this.monitoreos = new TreeSet<>();
     }
 
     public String getIdCliente() {
@@ -46,12 +47,12 @@ public class Cliente extends Usuario {
         return fechaRegistro;
     }
 
-    public SolicitudDeSoporte[] getSolicitudDeSoportes() {
-        return solicitudDeSoportes;
+    public TreeSet<SolicitudDeSoporte> getSolicitudes() {
+        return new TreeSet<>(solicitudes);
     }
 
-    public MonitoreoWifi[] getMonitoreoWiFi() {
-        return monitoreoWiFi;
+    public TreeSet<MonitoreoWifi> getMonitoreos() {
+        return new TreeSet<>(monitoreos);
     }
 
     public void setIdCliente(String idCliente){
@@ -74,27 +75,33 @@ public class Cliente extends Usuario {
             this.fechaRegistro = fechaRegistro;
     }
 
-    public void setSolicitudDeSoportes(SolicitudDeSoporte[] solicitudDeSoportes){
-        if(solicitudDeSoportes != null)
-            this.solicitudDeSoportes = solicitudDeSoportes;
+    public void setSolicitudes(TreeSet<SolicitudDeSoporte> solicitudes) {
+        this.solicitudes = solicitudes;
     }
 
-    public void setMonitoreoWiFi(MonitoreoWifi[] monitoreoWiFi) {
-        if(monitoreoWiFi != null)
-            this.monitoreoWiFi = monitoreoWiFi;
+    public void setMonitoreos(TreeSet<MonitoreoWifi> monitoreos) {
+        this.monitoreos = monitoreos;
     }
 
-    public void agregarMonitoreo(MonitoreoWifi m) {
+    public boolean agregarSolicitud(SolicitudDeSoporte s) {
+        if (s == null) return false;
+        return solicitudes.add(s);
+    }
+
+    public boolean agregarMonitoreo(MonitoreoWifi m) {
+        if (m == null) return false;
+        return monitoreos.add(m);
+    }
+
+
+
+    /*public void agregarMonitoreo(MonitoreoWifi m) {
         if (m == null) return;
 
         MonitoreoWifi[] aux = new MonitoreoWifi[monitoreoWiFi.length + 1];
         System.arraycopy(monitoreoWiFi, 0, aux, 0, monitoreoWiFi.length);
         aux[monitoreoWiFi.length] = m;
         monitoreoWiFi = aux;
-    }
-
-    public MonitoreoWifi[] getMonitoreos() {
-        return monitoreoWiFi;
     }
 
     public void agregarSolicitud(SolicitudDeSoporte s) {
@@ -111,11 +118,7 @@ public class Cliente extends Usuario {
 
         aux[solicitudDeSoportes.length] = s;
         solicitudDeSoportes = aux;
-    }   
-
-    public SolicitudDeSoporte[] getSolicitudes() {
-        return solicitudDeSoportes;
-    }
+    }*/
 
     @Override
     public boolean equals(Object obj) {
@@ -123,6 +126,11 @@ public class Cliente extends Usuario {
         if(!(obj instanceof Cliente)) return false;
         Cliente aux = (Cliente)obj;
         return this.getCedula().equals(aux.getCedula());
+    }
+
+    @Override
+    public int compareTo(Cliente o) {
+        return this.getCedula().compareTo(o.getCedula());
     }
 
     @Override

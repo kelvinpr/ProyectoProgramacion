@@ -1,5 +1,6 @@
 package Consola.GUI;
 
+import DAO.ExceptionDAO;
 import Dominio.*;
 import Extras.Funcionalidades;
 import ImplementacionDAO.EmpleadoDAOImpl;
@@ -20,32 +21,31 @@ public class IncidentesGUI {
     private EmpleadoDAO empleadoDAO = EmpleadoDAOImpl.getInstancia();
 
     public void crearDesdeSolicitud() {
+        try {
+            System.out.print("ID solicitud: ");
+            int id = func.validarEntradaOpcion();
 
-        System.out.print("ID solicitud: ");
-        int id = func.validarEntradaOpcion();
+            SolicitudDeSoporte s = solicitudDAO.buscarPorId(id);
 
-        SolicitudDeSoporte s = solicitudDAO.buscarPorId(id);
-        if (s == null) {
-            System.out.println("Solicitud no encontrada");
-            return;
+            if (s.getIncidente() != null) {
+                System.out.println("La solicitud ya tiene un incidente");
+                return;
+            }
+
+            Incidente i = new Incidente(
+                    (int) (System.currentTimeMillis() % 100000),
+                    LocalDate.now(),
+                    s.getDescripcion(),
+                    s
+            );
+
+            incidenteDAO.crear(i);
+            s.setIncidente(i);
+
+            System.out.println("Incidente creado a partir de la solicitud");
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
         }
-
-        if (s.getIncidente() != null) {
-            System.out.println("La solicitud ya tiene un incidente");
-            return;
-        }
-
-        Incidente i = new Incidente(
-                (int) (System.currentTimeMillis() % 100000),
-                LocalDate.now(),
-                s.getDescripcion(),
-                s                      
-        );
-
-        incidenteDAO.crear(i);
-        s.setIncidente(i);
-
-        System.out.println("Incidente creado a partir de la solicitud");
     }
 
     public void listarTodos() {
@@ -56,90 +56,90 @@ public class IncidentesGUI {
     }
 
     public void eliminarIncidente() {
-        System.out.print("ID incidente: ");
-        int id = func.validarEntradaOpcion();
-
-        if (incidenteDAO.eliminarPorId(id))
-            System.out.println("Incidente eliminado");
-        else
-            System.out.println("Incidente no encontrado");
+        try {
+            System.out.print("ID incidente: ");
+            int id = func.validarEntradaOpcion();
+            Incidente incidente = incidenteDAO.buscarPorId(id);
+            SolicitudDeSoporte s = incidente.getSolicitudOrigen();
+            incidenteDAO.eliminarPorId(id);
+            if (s != null) {
+                solicitudDAO.eliminarPorId(s.getIdSolicitud());
+            }
+            System.out.println("Incidente eliminado correctamente");
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
+        }
     }
 
     public void asignarEmpleado() {
+        try {
+            System.out.print("ID incidente: ");
+            int idIncidente = func.validarEntradaOpcion();
 
-        System.out.print("ID incidente: ");
-        int idIncidente = func.validarEntradaOpcion();
+            Incidente incidente = incidenteDAO.buscarPorId(idIncidente);
 
-        Incidente incidente = incidenteDAO.buscarPorId(idIncidente);
-        if (incidente == null) {
-            System.out.println("Incidente no encontrado");
-            return;
+            System.out.print("ID empleado: ");
+            String idEmpleado = func.validarUsuario();
+
+            Empleado emp = empleadoDAO.buscarPorId(idEmpleado);
+
+            incidente.asignarEmpleado(emp);
+            System.out.println("Empleado asignado correctamente");
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
         }
-
-        System.out.print("ID empleado: ");
-        String idEmpleado = func.validarUsuario();
-
-        Empleado emp = empleadoDAO.buscarPorId(idEmpleado);
-        if (emp == null) {
-            System.out.println("Empleado no encontrado");
-            return;
-        }
-
-        incidente.asignarEmpleado(emp);
-        System.out.println("Empleado asignado correctamente");
     }
 
     public void cambiarEstado() {
+        try {
+            System.out.print("ID incidente: ");
+            int idIncidente = func.validarEntradaOpcion();
 
-        System.out.print("ID incidente: ");
-        int idIncidente = func.validarEntradaOpcion();
+            Incidente incidente = incidenteDAO.buscarPorId(idIncidente);
 
-        Incidente incidente = incidenteDAO.buscarPorId(idIncidente);
-        if (incidente == null) {
-            System.out.println("Incidente no encontrado");
-            return;
+            System.out.println("Estado actual: " + incidente.getEstado());
+            System.out.println("1. PENDIENTE");
+            System.out.println("2. EN PROCESO");
+            System.out.println("3. ATENDIDO");
+
+            int op = func.validarEntradaOpcion();
+
+            EstadoIncidente nuevoEstado = switch (op) {
+                case 1 -> EstadoIncidente.PENDIENTE;
+                case 2 -> EstadoIncidente.EN_PROCESO;
+                case 3 -> EstadoIncidente.ATENDIDO;
+                default -> incidente.getEstado();
+            };
+
+            incidente.cambiarEstado(nuevoEstado);
+
+            if (nuevoEstado == EstadoIncidente.ATENDIDO) {
+                incidente.getSolicitudOrigen().setEstado(EstadoSolicitud.RESUELTA);
+            }
+
+            System.out.println("Estado actualizado correctamente");
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
         }
-
-        System.out.println("Estado actual: " + incidente.getEstado());
-        System.out.println("1. PENDIENTE");
-        System.out.println("2. EN PROCESO");
-        System.out.println("3. ATENDIDO");
-
-        int op = func.validarEntradaOpcion();
-
-        EstadoIncidente nuevoEstado = switch (op) {
-            case 1 -> EstadoIncidente.PENDIENTE;
-            case 2 -> EstadoIncidente.EN_PROCESO;
-            case 3 -> EstadoIncidente.ATENDIDO;
-            default -> incidente.getEstado();
-        };
-
-        incidente.cambiarEstado(nuevoEstado);
-
-        if (nuevoEstado == EstadoIncidente.ATENDIDO) {
-            incidente.getSolicitudOrigen().setEstado(EstadoSolicitud.RESUELTA);
-        }
-
-        System.out.println("Estado actualizado correctamente");
     }
 
     public void agregarComentario() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("ID incidente: ");
-        int idIncidente = func.validarEntradaOpcion();
+        try {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("ID incidente: ");
+            int idIncidente = func.validarEntradaOpcion();
 
-        Incidente incidente = incidenteDAO.buscarPorId(idIncidente);
-        if (incidente == null) {
-            System.out.println("Incidente no encontrado");
-            return;
+            Incidente incidente = incidenteDAO.buscarPorId(idIncidente);
+
+            System.out.print("Ingrese el comentario: ");
+            String comentario = sc.nextLine();
+
+            incidente.agregarComentario(comentario);
+
+            System.out.println("Comentario agregado correctamente");
+        }catch (ExceptionDAO e) {
+            System.out.println("Error -> " + e.getMessage());
         }
-
-        System.out.print("Ingrese el comentario: ");
-        String comentario = sc.nextLine();
-
-        incidente.agregarComentario(comentario);
-
-        System.out.println("Comentario agregado correctamente");
     }
 
 }

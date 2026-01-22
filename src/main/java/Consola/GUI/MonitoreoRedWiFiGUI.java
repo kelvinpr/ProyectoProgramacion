@@ -14,16 +14,15 @@ public class MonitoreoRedWiFiGUI {
     public MonitoreoRedWiFiGUI(Cliente cliente) {
         this.cliente = cliente;
 
-        if (cliente.getMonitoreos().length == 0) {
+        if (cliente.getMonitoreos().isEmpty()) {
             monitoreo = new MonitoreoWifi(
                     "MW-" + cliente.getIdCliente(),
                     "Red-" + cliente.getNombre()
             );
             cliente.agregarMonitoreo(monitoreo);
         } else {
-            monitoreo = cliente.getMonitoreos()[0];
+            monitoreo = cliente.getMonitoreos().getFirst();
         }
-
         monitoreo.iniciarMonitoreo();
     }
 

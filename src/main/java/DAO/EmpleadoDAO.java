@@ -2,15 +2,17 @@ package DAO;
 
 import Dominio.Empleado;
 
+import java.util.TreeSet;
+
 public interface EmpleadoDAO {
     
-    boolean crear(Empleado empleado);
+    boolean crear(Empleado empleado) throws ExceptionDAO;
 
-    Empleado buscarPorId(String idEmpleado);
+    Empleado buscarPorId(String idEmpleado) throws ExceptionDAO;
 
-    boolean actualizar(Empleado empleado);
+    boolean actualizar(Empleado empleado) throws ExceptionDAO;
 
-    Empleado[] listar();
+    TreeSet<Empleado> listar();
 
-    boolean eliminar(String idEmpleado);
+    boolean eliminar(String idEmpleado) throws ExceptionDAO;
 }

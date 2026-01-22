@@ -15,7 +15,7 @@ public class SubMenuIncidenteAdmin {
             System.out.println("1. Crear incidente desde solicitud");
             System.out.println("2. Asignar empleado");
             System.out.println("3. Cambiar estado del incidente");
-            System.out.println("4. Agregar comentario"); // 👈 NUEVO
+            System.out.println("4. Agregar comentario");
             System.out.println("5. Listar incidentes");
             System.out.println("6. Eliminar incidente");
             System.out.println("7. Volver");
@@ -26,7 +26,7 @@ public class SubMenuIncidenteAdmin {
                 case 1 -> gui.crearDesdeSolicitud();
                 case 2 -> gui.asignarEmpleado();
                 case 3 -> gui.cambiarEstado();
-                case 4 -> gui.agregarComentario(); // 👈 NUEVO
+                case 4 -> gui.agregarComentario(); //
                 case 5 -> gui.listarTodos();
                 case 6 -> gui.eliminarIncidente();
                 case 7 -> System.out.println("Volviendo...");

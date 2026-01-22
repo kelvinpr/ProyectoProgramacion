@@ -1,8 +1,9 @@
 package Dominio;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
-public class SolicitudDeSoporte {
+public class SolicitudDeSoporte implements Comparable<SolicitudDeSoporte>{
 
     private final int idSolicitud;
     private final LocalDate fechaSolicitud;
@@ -52,6 +53,19 @@ public class SolicitudDeSoporte {
 
     public String getDescripcion() {
         return descripcion;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof SolicitudDeSoporte)) return false;
+        SolicitudDeSoporte other = (SolicitudDeSoporte) obj;
+        return this.idSolicitud == other.idSolicitud;
+    }
+
+    @Override
+    public int compareTo(SolicitudDeSoporte o) {
+        return Integer.compare(this.idSolicitud, o.idSolicitud);
     }
 
     @Override

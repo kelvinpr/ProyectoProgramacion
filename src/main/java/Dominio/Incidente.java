@@ -1,7 +1,7 @@
 package Dominio;
 import java.time.LocalDate;
 
-public class Incidente {
+public class Incidente implements Comparable<Incidente> {
     private static final int COMENTARIOS_SIZE = 3;
     private final int idIncidente;
     private final   LocalDate fechaReporte;
@@ -101,6 +101,20 @@ public class Incidente {
         }
 
         comentarios[contadorComentarios++] = comentario;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Incidente)) return false;
+
+        Incidente other = (Incidente) obj;
+        return this.idIncidente == other.idIncidente;
+    }
+
+    @Override
+    public int compareTo(Incidente o) {
+        return Integer.compare(this.idIncidente, o.idIncidente);
     }
 
     @Override

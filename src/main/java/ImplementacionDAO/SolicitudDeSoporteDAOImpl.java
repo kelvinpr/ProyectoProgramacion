@@ -1,17 +1,18 @@
 package ImplementacionDAO;
 
+import DAO.ExceptionDAO;
 import DAO.SolicitudDeSoporteDAO;
 import Dominio.SolicitudDeSoporte;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class SolicitudDeSoporteDAOImpl implements SolicitudDeSoporteDAO{
 
     private static SolicitudDeSoporteDAOImpl instancia;
-    private SolicitudDeSoporte[] solicitudes;
-    private int contador;
+    private Set<SolicitudDeSoporte> solicitudDeSoporte;
 
     private SolicitudDeSoporteDAOImpl() {
-        solicitudes = new SolicitudDeSoporte[3];
-        contador = 0;
+        this.solicitudDeSoporte = new TreeSet<>();
     }
 
     public static SolicitudDeSoporteDAOImpl getInstancia() {
@@ -22,86 +23,57 @@ public class SolicitudDeSoporteDAOImpl implements SolicitudDeSoporteDAO{
     }
 
     @Override
-    public boolean crear(SolicitudDeSoporte solicitud) {
-        if (solicitud == null) return false;
-
-        if (contador >= solicitudes.length) {
-            SolicitudDeSoporte[] aux =
-                    new SolicitudDeSoporte[solicitudes.length + 1];
-            System.arraycopy(solicitudes, 0, aux, 0, solicitudes.length);
-            solicitudes = aux;
-        }
-
-        solicitudes[contador] = solicitud;
-        contador++;
+    public boolean crear(SolicitudDeSoporte solicitud) throws ExceptionDAO {
+        if (solicitud == null) throw new ExceptionDAO("Solicitud nula");
+        if(!solicitudDeSoporte.add(solicitud)) throw new ExceptionDAO("Solicitud duplicada");
         return true;
     }
 
     @Override
-    public SolicitudDeSoporte buscarPorId(int idSolicitud) {
-        for (int i = 0; i < contador; i++) {
-            if (solicitudes[i].getIdSolicitud() == idSolicitud) {
-                return solicitudes[i];
-            }
+    public SolicitudDeSoporte buscarPorId(int idSolicitud) throws ExceptionDAO {
+        for (SolicitudDeSoporte s : solicitudDeSoporte) {
+            if (s.getIdSolicitud() == idSolicitud) return s;
         }
-        return null;
+        throw new ExceptionDAO("Solicitud no encontrada");
     }
 
     @Override
-    public SolicitudDeSoporte[] listar() {
-        SolicitudDeSoporte[] aux = new SolicitudDeSoporte[contador];
-        System.arraycopy(solicitudes, 0, aux, 0, contador);
-        return aux;
+    public TreeSet<SolicitudDeSoporte> listar() {
+        return new TreeSet<>(solicitudDeSoporte);
     }
 
     @Override
-    public SolicitudDeSoporte[] listarPorCliente(String idCliente) {
-        int total = 0;
+    public TreeSet<SolicitudDeSoporte> listarPorCliente(String idCliente) {
 
-        for (int i = 0; i < contador; i++) {
-            if (solicitudes[i].getCliente()
-                    .getIdCliente().equals(idCliente)) {
-                total++;
+        TreeSet<SolicitudDeSoporte> resultado = new TreeSet<>();
+
+        for (SolicitudDeSoporte s : solicitudDeSoporte) {
+            if (s.getCliente() != null &&
+                    s.getCliente().getIdCliente().equals(idCliente)) {
+
+                resultado.add(s);
             }
         }
 
-        SolicitudDeSoporte[] aux = new SolicitudDeSoporte[total];
-        int index = 0;
-
-        for (int i = 0; i < contador; i++) {
-            if (solicitudes[i].getCliente()
-                    .getIdCliente().equals(idCliente)) {
-                aux[index++] = solicitudes[i];
-            }
-        }
-
-        return aux;
+        return resultado;
     }
 
+
     @Override
-    public boolean actualizar(SolicitudDeSoporte solicitud) {
+    public boolean actualizar(SolicitudDeSoporte solicitud) throws ExceptionDAO {
         if (solicitud == null) return false;
-
-        for (int i = 0; i < contador; i++) {
-            if (solicitudes[i].getIdSolicitud()
-                    == solicitud.getIdSolicitud()) {
-                solicitudes[i] = solicitud;
-                return true;
-            }
-        }
-        return false;
+        SolicitudDeSoporte aux = buscarPorId(solicitud.getIdSolicitud());
+        if (aux == null) return false;
+        solicitudDeSoporte.remove(aux);
+        solicitudDeSoporte.add(solicitud);
+        return true;
     }
 
     @Override
-    public boolean eliminarPorId(int idSolicitud) {
-        for (int i = 0; i < contador; i++) {
-            if (solicitudes[i].getIdSolicitud() == idSolicitud) {
-                System.arraycopy(solicitudes, i + 1, solicitudes, i, contador - i - 1);
-                solicitudes[contador - 1] = null;
-                contador--;
-                return true;
-            }
-        }
-        return false;
+    public boolean eliminarPorId(int idSolicitud) throws  ExceptionDAO {
+        SolicitudDeSoporte aux = buscarPorId(idSolicitud);
+        if (aux == null) return false;
+        solicitudDeSoporte.remove(aux);
+        return true;
     }
 }
